@@ -1,0 +1,61 @@
+2016-10-15 13:26:08,003 manager INFO 1.1.0
+2016-10-15 13:26:08,003 manager INFO Copyright (C) 2003-2010
+2016-10-15 13:26:08,003 manager INFO   Noriaki Ando
+2016-10-15 13:26:08,003 manager INFO   Intelligent Systems Research Institute, AIST
+2016-10-15 13:26:08,003 manager INFO Manager starting.
+2016-10-15 13:26:08,005 manager INFO Starting local logging.
+2016-10-15 13:26:08,023 manager.namingmanager INFO NameServer connection succeeded: corba/localhost
+2016-10-15 13:26:10,042 ManagerServant INFO Master manager not found
+2016-10-15 13:26:10,045 manager WARNING Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\Manager.py", line 1900, in initManagerServant
+    reffile = file(self._config.getProperty("manager.refstring_path"),'w')
+IOError: [Errno 2] No such file or directory: '/var/log/rtcmanager.ref'
+
+2016-10-15 13:26:10,046 LocalServiceAdmin INFO All the local services are enabled.
+2016-10-15 13:26:10,065 ec_base INFO setRate(1000000.000000) done
+2016-10-15 13:26:10,066 ec_base INFO setRate(1000.000000) done
+2016-10-15 13:26:10,068 rtobject INFO 1 execution context was created.
+2016-10-15 13:26:10,078 rtobject INFO Initial active configuration set is default.
+2016-10-15 13:29:39,226 SdoServiceAdmin WARNING No available SDO service in the factory: 
+2016-10-15 13:29:39,226 SdoServiceAdmin ERROR type  already exists.
+2016-10-15 13:29:39,230 SdoServiceAdmin WARNING No available SDO service in the factory: IDL:OpenRTM/ComponentObserver:1.0
+2016-10-15 13:29:39,230 SdoServiceAdmin ERROR type d76e8af1-9a3e-449c-b503-db376e5ddcaf already exists.
+2016-10-15 13:30:33,319 rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\RTObject.py", line 1319, in on_activated
+    ret = self.onActivated(ec_id)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 278, in onActivated
+    self.SPort=serial.Serial(self._Port[0],timeout=TimeOut)
+  File "C:\Python27\Lib\site-packages\serial\serialwin32.py", line 31, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Python27\Lib\site-packages\serial\serialutil.py", line 182, in __init__
+    self.open()
+  File "C:\Python27\Lib\site-packages\serial\serialwin32.py", line 62, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+SerialException: could not open port 'COM1': WindowsError(2, '\x8ew\x92\xe8\x82\xb3\x82\xea\x82\xbd\x83t\x83@\x83C\x83\x8b\x82\xaa\x8c\xa9\x82\xc2\x82\xa9\x82\xe8\x82\xdc\x82\xb9\x82\xf1\x81B')
+
+2016-10-15 13:30:33,322 rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\RTObject.py", line 1560, in on_execute
+    ret = self.onExecute(ec_id)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 333, in onExecute
+    self.Send(0x02,VL*CntPM)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 370, in Send
+    self.SPort.write(MakeData(ID,Data))
+AttributeError: 'NoneType' object has no attribute 'write'
+
+2016-10-15 13:30:33,342 rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\RTObject.py", line 1359, in on_deactivated
+    ret = self.onDeactivated(ec_id)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 304, in onDeactivated
+    self.Send(0x78,False)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 370, in Send
+    self.SPort.write(MakeData(ID,Data))
+AttributeError: 'NoneType' object has no attribute 'write'
+
+2016-10-15 13:30:43,216 ec_worker ERROR State of the RTC is not ACTIVE_STATE.
+2016-10-15 13:32:06,325 ec_base ERROR The component is not responding.
+2016-10-15 13:32:06,325 ec_base ERROR Unknown error: Invalid state transition.
+2016-10-15 13:38:33,483 ec_worker ERROR State of the RTC is not ERROR_STATE.
+2016-10-15 13:38:43,427 ec_worker ERROR State of the RTC is not ERROR_STATE.
+2016-10-15 13:38:48,378 ec_worker ERROR State of the RTC is not ACTIVE_STATE.
+2016-10-15 13:38:48,384 ec_worker WARNING ExecutionContext is already stopped.
+2016-10-15 13:38:48,385 ec_base ERROR Invoking on_shutdown() for each RTC failed.

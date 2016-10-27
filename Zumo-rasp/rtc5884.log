@@ -1,0 +1,35 @@
+2016-10-18 17:31:11,065 manager INFO 1.1.0
+2016-10-18 17:31:11,066 manager INFO Copyright (C) 2003-2010
+2016-10-18 17:31:11,066 manager INFO   Noriaki Ando
+2016-10-18 17:31:11,066 manager INFO   Intelligent Systems Research Institute, AIST
+2016-10-18 17:31:11,066 manager INFO Manager starting.
+2016-10-18 17:31:11,066 manager INFO Starting local logging.
+2016-10-18 17:31:11,075 manager.namingmanager INFO NameServer connection succeeded: corba/localhost
+2016-10-18 17:31:13,094 ManagerServant INFO Master manager not found
+2016-10-18 17:31:13,098 manager WARNING Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\Manager.py", line 1900, in initManagerServant
+    reffile = file(self._config.getProperty("manager.refstring_path"),'w')
+IOError: [Errno 2] No such file or directory: '/var/log/rtcmanager.ref'
+
+2016-10-18 17:31:13,101 LocalServiceAdmin INFO All the local services are enabled.
+2016-10-18 17:31:13,125 ec_base INFO setRate(1000000.000000) done
+2016-10-18 17:31:13,125 ec_base INFO setRate(1000.000000) done
+2016-10-18 17:31:13,127 rtobject INFO 1 execution context was created.
+2016-10-18 17:31:13,140 rtobject INFO Initial active configuration set is default.
+2016-10-18 17:31:19,112 SdoServiceAdmin WARNING No available SDO service in the factory: 
+2016-10-18 17:31:19,112 SdoServiceAdmin ERROR type  already exists.
+2016-10-18 17:31:19,117 SdoServiceAdmin WARNING No available SDO service in the factory: IDL:OpenRTM/ComponentObserver:1.0
+2016-10-18 17:31:19,118 SdoServiceAdmin ERROR type bae99655-84e0-45ac-88b5-d763b778e534 already exists.
+2016-10-18 17:32:14,594 rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\RTObject.py", line 1318, in on_activated
+    self._configsets.update()
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\ConfigAdmin.py", line 660, in update
+    self.update(self._activeId)
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\ConfigAdmin.py", line 642, in update
+    self._params[i].update(prop.getProperty(self._params[i].name))
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\ConfigAdmin.py", line 218, in update
+    if self._trans(self._var, val):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\StringUtil.py", line 560, in stringTo
+    _type[0] = int(_str)
+ValueError: invalid literal for int() with base 10: '0.2'
+

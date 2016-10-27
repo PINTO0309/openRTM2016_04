@@ -1,0 +1,18 @@
+2016-10-04 11:56:25,211 manager INFO 1.1.0
+2016-10-04 11:56:25,211 manager INFO Copyright (C) 2003-2010
+2016-10-04 11:56:25,211 manager INFO   Noriaki Ando
+2016-10-04 11:56:25,211 manager INFO   Intelligent Systems Research Institute, AIST
+2016-10-04 11:56:25,211 manager INFO Manager starting.
+2016-10-04 11:56:25,211 manager INFO Starting local logging.
+2016-10-04 11:56:27,217 manager.namingmanager INFO NameServer connection failed: corba/localhost
+2016-10-04 11:56:29,240 ManagerServant INFO Master manager not found
+2016-10-04 11:56:29,243 manager WARNING Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\Manager.py", line 1900, in initManagerServant
+    reffile = file(self._config.getProperty("manager.refstring_path"),'w')
+IOError: [Errno 2] No such file or directory: '/var/log/rtcmanager.ref'
+
+2016-10-04 11:56:29,244 LocalServiceAdmin INFO All the local services are enabled.
+2016-10-04 11:56:29,263 ec_base INFO setRate(1000000.000000) done
+2016-10-04 11:56:29,263 ec_base INFO setRate(1000.000000) done
+2016-10-04 11:56:29,266 rtobject INFO 1 execution context was created.
+2016-10-04 11:56:29,280 rtobject INFO Initial active configuration set is default.

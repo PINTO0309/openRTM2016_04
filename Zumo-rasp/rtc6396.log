@@ -1,0 +1,149 @@
+2016-10-01 14:37:21,953 manager INFO 1.1.0
+2016-10-01 14:37:21,953 manager INFO Copyright (C) 2003-2010
+2016-10-01 14:37:21,953 manager INFO   Noriaki Ando
+2016-10-01 14:37:21,954 manager INFO   Intelligent Systems Research Institute, AIST
+2016-10-01 14:37:21,954 manager INFO Manager starting.
+2016-10-01 14:37:21,954 manager INFO Starting local logging.
+2016-10-01 14:37:21,973 manager.namingmanager INFO NameServer connection succeeded: corba/localhost
+2016-10-01 14:37:24,028 ManagerServant INFO Master manager not found
+2016-10-01 14:37:24,030 manager WARNING Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\Manager.py", line 1900, in initManagerServant
+    reffile = file(self._config.getProperty("manager.refstring_path"),'w')
+IOError: [Errno 2] No such file or directory: '/var/log/rtcmanager.ref'
+
+2016-10-01 14:37:24,032 LocalServiceAdmin INFO All the local services are enabled.
+2016-10-01 14:37:24,052 ec_base INFO setRate(1000000.000000) done
+2016-10-01 14:37:24,053 ec_base INFO setRate(1000.000000) done
+2016-10-01 14:37:24,055 rtobject INFO 1 execution context was created.
+2016-10-01 14:37:24,065 rtobject INFO Initial active configuration set is default.
+2016-10-01 14:37:29,049 SdoServiceAdmin WARNING No available SDO service in the factory: 
+2016-10-01 14:37:29,051 SdoServiceAdmin ERROR type  already exists.
+2016-10-01 14:37:29,055 SdoServiceAdmin WARNING No available SDO service in the factory: IDL:OpenRTM/ComponentObserver:1.0
+2016-10-01 14:37:29,056 SdoServiceAdmin ERROR type 6c8c101c-ee09-4cfb-8a8b-ea23ce7cf9c3 already exists.
+2016-10-01 14:38:56,084 rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\RTObject.py", line 1319, in on_activated
+    ret = self.onActivated(ec_id)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 278, in onActivated
+    self.SPort=serial.Serial(self._Port[0],timeout=TimeOut)
+  File "C:\Python27\Lib\site-packages\serial\serialwin32.py", line 31, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Python27\Lib\site-packages\serial\serialutil.py", line 182, in __init__
+    self.open()
+  File "C:\Python27\Lib\site-packages\serial\serialwin32.py", line 62, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+SerialException: could not open port 'COM1': WindowsError(2, '\x8ew\x92\xe8\x82\xb3\x82\xea\x82\xbd\x83t\x83@\x83C\x83\x8b\x82\xaa\x8c\xa9\x82\xc2\x82\xa9\x82\xe8\x82\xdc\x82\xb9\x82\xf1\x81B')
+
+2016-10-01 14:38:56,088 rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\RTObject.py", line 1560, in on_execute
+    ret = self.onExecute(ec_id)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 333, in onExecute
+    self.Send(0x02,VL*CntPM)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 370, in Send
+    self.SPort.write(MakeData(ID,Data))
+AttributeError: 'NoneType' object has no attribute 'write'
+
+2016-10-01 14:38:56,089 rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\RTObject.py", line 1359, in on_deactivated
+    ret = self.onDeactivated(ec_id)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 304, in onDeactivated
+    self.Send(0x78,False)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 370, in Send
+    self.SPort.write(MakeData(ID,Data))
+AttributeError: 'NoneType' object has no attribute 'write'
+
+2016-10-01 14:40:20,941 ec_worker ERROR State of the RTC is not ACTIVE_STATE.
+2016-10-01 14:40:24,631 ec_worker ERROR State of the RTC is not INACTIVE_STATE.
+2016-10-01 14:40:26,177 ec_worker ERROR State of the RTC is not INACTIVE_STATE.
+2016-10-01 14:44:26,676 ec_worker ERROR State of the RTC is not ACTIVE_STATE.
+2016-10-01 14:45:52,732 ec_worker ERROR State of the RTC is not ACTIVE_STATE.
+2016-10-01 14:46:46,180 ec_base ERROR The component is not responding.
+2016-10-01 14:46:46,180 ec_base ERROR Unknown error: Invalid state transition.
+2016-10-01 14:51:14,717 rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\RTObject.py", line 1560, in on_execute
+    ret = self.onExecute(ec_id)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 333, in onExecute
+    self.Send(0x02,VL*CntPM)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 370, in Send
+    self.SPort.write(MakeData(ID,Data))
+  File "C:\Python27\Lib\site-packages\serial\serialwin32.py", line 322, in write
+    raise writeTimeoutError
+SerialTimeoutException: Write timeout
+
+2016-10-01 14:51:14,719 rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\RTObject.py", line 1359, in on_deactivated
+    ret = self.onDeactivated(ec_id)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 304, in onDeactivated
+    self.Send(0x78,False)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 370, in Send
+    self.SPort.write(MakeData(ID,Data))
+  File "C:\Python27\Lib\site-packages\serial\serialwin32.py", line 322, in write
+    raise writeTimeoutError
+SerialTimeoutException: Write timeout
+
+2016-10-01 14:56:31,187 ec_worker ERROR State of the RTC is not ACTIVE_STATE.
+2016-10-01 14:56:46,542 rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\RTObject.py", line 1319, in on_activated
+    ret = self.onActivated(ec_id)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 278, in onActivated
+    self.SPort=serial.Serial(self._Port[0],timeout=TimeOut)
+  File "C:\Python27\Lib\site-packages\serial\serialwin32.py", line 31, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Python27\Lib\site-packages\serial\serialutil.py", line 182, in __init__
+    self.open()
+  File "C:\Python27\Lib\site-packages\serial\serialwin32.py", line 62, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+SerialException: could not open port 'COM12': WindowsError(2, '\x8ew\x92\xe8\x82\xb3\x82\xea\x82\xbd\x83t\x83@\x83C\x83\x8b\x82\xaa\x8c\xa9\x82\xc2\x82\xa9\x82\xe8\x82\xdc\x82\xb9\x82\xf1\x81B')
+
+2016-10-01 14:56:46,548 rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\RTObject.py", line 1560, in on_execute
+    ret = self.onExecute(ec_id)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 333, in onExecute
+    self.Send(0x02,VL*CntPM)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 370, in Send
+    self.SPort.write(MakeData(ID,Data))
+AttributeError: 'NoneType' object has no attribute 'write'
+
+2016-10-01 14:56:46,549 rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\RTObject.py", line 1359, in on_deactivated
+    ret = self.onDeactivated(ec_id)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 304, in onDeactivated
+    self.Send(0x78,False)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 370, in Send
+    self.SPort.write(MakeData(ID,Data))
+AttributeError: 'NoneType' object has no attribute 'write'
+
+2016-10-01 14:56:51,270 ec_worker ERROR State of the RTC is not ACTIVE_STATE.
+2016-10-01 14:57:07,707 rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\RTObject.py", line 1319, in on_activated
+    ret = self.onActivated(ec_id)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 278, in onActivated
+    self.SPort=serial.Serial(self._Port[0],timeout=TimeOut)
+  File "C:\Python27\Lib\site-packages\serial\serialwin32.py", line 31, in __init__
+    super(Serial, self).__init__(*args, **kwargs)
+  File "C:\Python27\Lib\site-packages\serial\serialutil.py", line 182, in __init__
+    self.open()
+  File "C:\Python27\Lib\site-packages\serial\serialwin32.py", line 62, in open
+    raise SerialException("could not open port {!r}: {!r}".format(self.portstr, ctypes.WinError()))
+SerialException: could not open port 'COM12': WindowsError(2, '\x8ew\x92\xe8\x82\xb3\x82\xea\x82\xbd\x83t\x83@\x83C\x83\x8b\x82\xaa\x8c\xa9\x82\xc2\x82\xa9\x82\xe8\x82\xdc\x82\xb9\x82\xf1\x81B')
+
+2016-10-01 14:57:07,710 rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\RTObject.py", line 1560, in on_execute
+    ret = self.onExecute(ec_id)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 333, in onExecute
+    self.Send(0x02,VL*CntPM)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 370, in Send
+    self.SPort.write(MakeData(ID,Data))
+AttributeError: 'NoneType' object has no attribute 'write'
+
+2016-10-01 14:57:07,711 rtobject ERROR Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\RTObject.py", line 1359, in on_deactivated
+    ret = self.onDeactivated(ec_id)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 304, in onDeactivated
+    self.Send(0x78,False)
+  File "C:\Users\robot\Desktop\Zumo\Zumo.py", line 370, in Send
+    self.SPort.write(MakeData(ID,Data))
+AttributeError: 'NoneType' object has no attribute 'write'
+
+2016-10-01 14:57:11,812 ec_worker ERROR State of the RTC is not ACTIVE_STATE.
+2016-10-01 14:57:11,819 ec_worker WARNING ExecutionContext is already stopped.
+2016-10-01 14:57:11,819 ec_base ERROR Invoking on_shutdown() for each RTC failed.

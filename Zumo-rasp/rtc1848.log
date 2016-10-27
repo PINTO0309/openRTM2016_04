@@ -1,0 +1,31 @@
+2016-09-23 13:11:32,796 manager INFO 1.1.0
+2016-09-23 13:11:32,796 manager INFO Copyright (C) 2003-2010
+2016-09-23 13:11:32,796 manager INFO   Noriaki Ando
+2016-09-23 13:11:32,796 manager INFO   Intelligent Systems Research Institute, AIST
+2016-09-23 13:11:32,796 manager INFO Manager starting.
+2016-09-23 13:11:32,796 manager INFO Starting local logging.
+2016-09-23 13:11:32,805 manager.namingmanager INFO NameServer connection succeeded: corba/localhost
+2016-09-23 13:11:34,838 ManagerServant INFO Master manager not found
+2016-09-23 13:11:34,839 manager WARNING Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\Manager.py", line 1900, in initManagerServant
+    reffile = file(self._config.getProperty("manager.refstring_path"),'w')
+IOError: [Errno 2] No such file or directory: '/var/log/rtcmanager.ref'
+
+2016-09-23 13:11:34,839 LocalServiceAdmin INFO All the local services are enabled.
+2016-09-23 13:11:34,855 ec_base INFO setRate(1000000.000000) done
+2016-09-23 13:11:34,857 ec_base INFO setRate(1000.000000) done
+2016-09-23 13:11:34,858 rtobject INFO 1 execution context was created.
+2016-09-23 13:11:34,865 rtobject INFO Initial active configuration set is default.
+2016-09-23 13:11:56,006 manager.namingoncorba ERROR Traceback (most recent call last):
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\NamingManager.py", line 159, in bindObject
+    self._cosnaming.rebindByString(name, rtobj.getObjRef(), True)
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\CorbaNaming.py", line 386, in rebindByString
+    self.rebind(self.toName(string_name), obj, force)
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\CorbaNaming.py", line 347, in rebind
+    self.rebindRecursive(self._rootContext, name_list, obj)
+  File "C:\Python27\Lib\site-packages\OpenRTM_aist\CorbaNaming.py", line 419, in rebindRecursive
+    context.rebind(self.subName(name_list, i, i), obj)
+  File "C:\Python27\Lib\site-packages\CosNaming_idl.py", line 230, in rebind
+    return self._obj.invoke("rebind", _0_CosNaming.NamingContext._d_rebind, args)
+TRANSIENT: CORBA.TRANSIENT(omniORB.TRANSIENT_ConnectFailed, CORBA.COMPLETED_NO)
+
