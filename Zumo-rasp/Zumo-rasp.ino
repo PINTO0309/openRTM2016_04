@@ -3,10 +3,12 @@
 #include "Motor.h"
 #include "SerialPort.h"
 #include "Button.h"
+#include "LineSensor.h"
 
 Motor motor;
 SerialPort Port;
 Button button;
+LineSensor lsens;
 void setup() {
   // put your setup code here, to run once:
 
@@ -17,6 +19,7 @@ void loop() {
   static bool SendData = true;
   // put your main code here, to run repeatedly:
 
+  /*データの受信*/
   while (true) {
     switch (Port.CheckData()) {
       case 0x00:
@@ -56,10 +59,12 @@ void loop() {
         break;
       //0x7A .. 0x7F
       default:
+        /*受信したデータが無い or 受信に失敗したため、ループを脱出*/
         goto ExitLoop;
     }
   }
 ExitLoop:
+  /*データの送信*/
   if (millis() - LastTime >= WaitTime) {
     LastTime = millis();
 
@@ -67,7 +72,9 @@ ExitLoop:
 
     if (SendData) {
       motor.SendSpeed(Port);
+      lsens.SendStatus(Port);
     }
   }
+  /*ボダンの情報送信*/
   button.SendStatus(Port);
 }

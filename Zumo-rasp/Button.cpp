@@ -1,5 +1,11 @@
 #include "Button.h"
 
+/**
+ * ボタンの情報を送信
+ * 変化があったときだけ送信を実行
+ * 引数   : port : シリアルポートインスタンス
+ * 返り値 : 無し
+ */
 void Button::SendStatus(SerialPort port) {
   bool A = btnA.isPressed ();
   bool B = btnB.isPressed ();
