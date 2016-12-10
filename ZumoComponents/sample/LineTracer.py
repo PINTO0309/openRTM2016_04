@@ -30,21 +30,51 @@ import OpenRTM_aist
 
 # This module's spesification
 # <rtc-template block="module_spec">
-linetracer_spec = ["implementation_id", "LineTracer",
-		 "type_name",         "LineTracer",
-		 "description",       "ModuleDescription",
-		 "version",           "1.0.0",
-		 "vendor",            "VenderName",
-		 "category",          "Category",
-		 "activity_type",     "STATIC",
-		 "max_instance",      "1",
-		 "language",          "Python",
+linetracer_spec = ["implementation_id", "LineTracer", 
+		 "type_name",         "LineTracer", 
+		 "description",       "ModuleDescription", 
+		 "version",           "1.0.0", 
+		 "vendor",            "Konan University", 
+		 "category",          "Category", 
+		 "activity_type",     "STATIC", 
+		 "max_instance",      "1", 
+		 "language",          "Python", 
 		 "lang_type",         "SCRIPT",
 		 "conf.default.Threshold", "500",
+		 "conf.default.VX_weight_sensor_DOWN1", "-0.005",
+		 "conf.default.VX_weight_sensor_DOWN2", "0.05",
+		 "conf.default.VX_weight_sensor_DOWN3", "0.1",
+		 "conf.default.VX_weight_sensor_DOWN4", "0.05",
+		 "conf.default.VX_weight_sensor_DOWN5", "-0.005",
+		 "conf.default.VA_weight_sensor_DOWN1", "5.0",
+		 "conf.default.VA_weight_sensor_DOWN2", "3.0",
+		 "conf.default.VA_weight_sensor_DOWN3", "0.0",
+		 "conf.default.VA_weight_sensor_DOWN4", "-3.0",
+		 "conf.default.VA_weight_sensor_DOWN5", "-5.0",
 
 		 "conf.__widget__.Threshold", "text",
+		 "conf.__widget__.VX_weight_sensor_DOWN1", "text",
+		 "conf.__widget__.VX_weight_sensor_DOWN2", "text",
+		 "conf.__widget__.VX_weight_sensor_DOWN3", "text",
+		 "conf.__widget__.VX_weight_sensor_DOWN4", "text",
+		 "conf.__widget__.VX_weight_sensor_DOWN5", "text",
+		 "conf.__widget__.VA_weight_sensor_DOWN1", "text",
+		 "conf.__widget__.VA_weight_sensor_DOWN2", "text",
+		 "conf.__widget__.VA_weight_sensor_DOWN3", "text",
+		 "conf.__widget__.VA_weight_sensor_DOWN4", "text",
+		 "conf.__widget__.VA_weight_sensor_DOWN5", "text",
 
          "conf.__type__.Threshold", "int",
+         "conf.__type__.VX_weight_sensor_DOWN1", "double",
+         "conf.__type__.VX_weight_sensor_DOWN2", "double",
+         "conf.__type__.VX_weight_sensor_DOWN3", "double",
+         "conf.__type__.VX_weight_sensor_DOWN4", "double",
+         "conf.__type__.VX_weight_sensor_DOWN5", "double",
+         "conf.__type__.VA_weight_sensor_DOWN1", "double",
+         "conf.__type__.VA_weight_sensor_DOWN2", "double",
+         "conf.__type__.VA_weight_sensor_DOWN3", "double",
+         "conf.__type__.VA_weight_sensor_DOWN4", "double",
+         "conf.__type__.VA_weight_sensor_DOWN5", "double",
 
 		 ""]
 # </rtc-template>
@@ -52,86 +82,164 @@ linetracer_spec = ["implementation_id", "LineTracer",
 ##
 # @class LineTracer
 # @brief ModuleDescription
-#
-#
+# 
+# 
 class LineTracer(OpenRTM_aist.DataFlowComponentBase):
-
+	
 	##
 	# @brief constructor
 	# @param manager Maneger Object
-	#
+	# 
 	def __init__(self, manager):
 		OpenRTM_aist.DataFlowComponentBase.__init__(self, manager)
 
+#		LineSensors_arg = [None] * ((len(RTC._d_TimedULongSeq) - 4) / 2)
+#		self._d_LineSensors = RTC.TimedULongSeq(*LineSensors_arg)
 		self._d_LineSensors = RTC.TimedULongSeq(RTC.Time(0,0),0)
 		"""
 		"""
 		self._LineSensorsIn = OpenRTM_aist.InPort("LineSensors", self._d_LineSensors)
+#		Velocity_arg = [None] * ((len(RTC._d_TimedVelocity2D) - 4) / 2)
+#		self._d_Velocity = RTC.TimedVelocity2D(*Velocity_arg)
 		self._d_Velocity = RTC.TimedVelocity2D(RTC.Time(0,0),0)
 		"""
 		"""
 		self._VelocityOut = OpenRTM_aist.OutPort("Velocity", self._d_Velocity)
 
 
-
+		
 
 
 		# initialize of configuration-data.
 		# <rtc-template block="init_conf_param">
 		"""
-
+		
 		 - Name:  Threshold
 		 - DefaultValue: 500
 		"""
 		self._Threshold = [500]
-
+		"""
+		ライントレース時のラインセンサの検出結果に対するロボットの指令速度への重み．
+		Zumo下部のラインセンサは左側からセンサ1-5に対応する．DOWNは，Zumoのラインセン
+		サの信号名に対応．
+		 - Name:  VX_weight_sensor_DOWN1
+		 - DefaultValue: -0.005
+		"""
+		self._VX_weight_sensor_DOWN1 = [-0.005]
+		"""
+		
+		 - Name:  VX_weight_sensor_DOWN2
+		 - DefaultValue: 0.05
+		"""
+		self._VX_weight_sensor_DOWN2 = [0.05]
+		"""
+		
+		 - Name:  VX_weight_sensor_DOWN3
+		 - DefaultValue: 0.1
+		"""
+		self._VX_weight_sensor_DOWN3 = [0.1]
+		"""
+		
+		 - Name:  VX_weight_sensor_DOWN4
+		 - DefaultValue: 0.05
+		"""
+		self._VX_weight_sensor_DOWN4 = [0.05]
+		"""
+		
+		 - Name:  VX_weight_sensor_DOWN5
+		 - DefaultValue: -0.005
+		"""
+		self._VX_weight_sensor_DOWN5 = [-0.005]
+		"""
+		ライントレース時のラインセンサの検出結果に対するロボットの指令角速度への重み
+		．Zumo下部のラインセンサは左側からセンサ1-5に対応する．DOWNは，Zumoのラインセ
+		ンサの信号名に対応．
+		 - Name:  VA_weight_sensor_DOWN1
+		 - DefaultValue: 5.0
+		"""
+		self._VA_weight_sensor_DOWN1 = [5.0]
+		"""
+		
+		 - Name:  VA_weight_sensor_DOWN2
+		 - DefaultValue: 3.0
+		"""
+		self._VA_weight_sensor_DOWN2 = [3.0]
+		"""
+		
+		 - Name:  VA_weight_sensor_DOWN3
+		 - DefaultValue: 0.0
+		"""
+		self._VA_weight_sensor_DOWN3 = [0.0]
+		"""
+		
+		 - Name:  VA_weight_sensor_DOWN4
+		 - DefaultValue: -3.0
+		"""
+		self._VA_weight_sensor_DOWN4 = [-3.0]
+		"""
+		
+		 - Name:  VA_weight_sensor_DOWN5
+		 - DefaultValue: -5.0
+		"""
+		self._VA_weight_sensor_DOWN5 = [-5.0]
+		
 		# </rtc-template>
 
 
-
+		 
 	##
 	#
 	# The initialize action (on CREATED->ALIVE transition)
-	# formaer rtc_init_entry()
-	#
+	# formaer rtc_init_entry() 
+	# 
 	# @return RTC::ReturnCode_t
-	#
+	# 
 	#
 	def onInitialize(self):
 		# Bind variables and configuration variable
-		#self.bindParameter("Threshold", self._Threshold, "500")
-
+		self.bindParameter("Threshold", self._Threshold, "500")
+		self.bindParameter("VX_weight_sensor_DOWN1", self._VX_weight_sensor_DOWN1, "-0.005")
+		self.bindParameter("VX_weight_sensor_DOWN2", self._VX_weight_sensor_DOWN2, "0.05")
+		self.bindParameter("VX_weight_sensor_DOWN3", self._VX_weight_sensor_DOWN3, "0.1")
+		self.bindParameter("VX_weight_sensor_DOWN4", self._VX_weight_sensor_DOWN4, "0.05")
+		self.bindParameter("VX_weight_sensor_DOWN5", self._VX_weight_sensor_DOWN5, "-0.005")
+		self.bindParameter("VA_weight_sensor_DOWN1", self._VA_weight_sensor_DOWN1, "5.0")
+		self.bindParameter("VA_weight_sensor_DOWN2", self._VA_weight_sensor_DOWN2, "3.0")
+		self.bindParameter("VA_weight_sensor_DOWN3", self._VA_weight_sensor_DOWN3, "0.0")
+		self.bindParameter("VA_weight_sensor_DOWN4", self._VA_weight_sensor_DOWN4, "-3.0")
+		self.bindParameter("VA_weight_sensor_DOWN5", self._VA_weight_sensor_DOWN5, "-5.0")
+		
 		# Set InPort buffers
 		self.addInPort("LineSensors",self._LineSensorsIn)
-
+		
 		# Set OutPort buffers
 		self.addOutPort("Velocity",self._VelocityOut)
-
+		
 		# Set service provider to Ports
-
+		
 		# Set service consumers to Ports
-
+		
 		# Set CORBA Service Ports
-
+		
 		return RTC.RTC_OK
-
+	
 	#	##
-	#	#
+	#	# 
 	#	# The finalize action (on ALIVE->END transition)
 	#	# formaer rtc_exiting_entry()
-	#	#
+	#	# 
 	#	# @return RTC::ReturnCode_t
 	#
-	#	#
+	#	# 
 	#def onFinalize(self):
 	#
 	#	return RTC.RTC_OK
-
+	
 	#	##
 	#	#
 	#	# The startup action when ExecutionContext startup
 	#	# former rtc_starting_entry()
-	#	#
+	#	# 
 	#	# @param ec_id target ExecutionContext Id
 	#	#
 	#	# @return RTC::ReturnCode_t
@@ -140,7 +248,7 @@ class LineTracer(OpenRTM_aist.DataFlowComponentBase):
 	#def onStartup(self, ec_id):
 	#
 	#	return RTC.RTC_OK
-
+	
 	#	##
 	#	#
 	#	# The shutdown action when ExecutionContext stop
@@ -154,21 +262,21 @@ class LineTracer(OpenRTM_aist.DataFlowComponentBase):
 	#def onShutdown(self, ec_id):
 	#
 	#	return RTC.RTC_OK
-
+	
 	#	##
 	#	#
 	#	# The activated action (Active state entry action)
 	#	# former rtc_active_entry()
 	#	#
 	#	# @param ec_id target ExecutionContext Id
-	#	#
+	#	# 
 	#	# @return RTC::ReturnCode_t
 	#	#
 	#	#
 	#def onActivated(self, ec_id):
 	#
 	#	return RTC.RTC_OK
-
+	
 	#	##
 	#	#
 	#	# The deactivated action (Active state exit action)
@@ -182,7 +290,7 @@ class LineTracer(OpenRTM_aist.DataFlowComponentBase):
 	#def onDeactivated(self, ec_id):
 	#
 	#	return RTC.RTC_OK
-
+	
 		##
 		#
 		# The execution action that is invoked periodically
@@ -195,16 +303,28 @@ class LineTracer(OpenRTM_aist.DataFlowComponentBase):
 		#
 	def onExecute(self, ec_id):
 		if self._LineSensorsIn.isNew():# 速度の送信
-                    d=self._LineSensorsIn.read().data
-                    vx=sum(map(lambda x,y:x*y/(sum(d)+1),d,[-0.05,0.5,1.0, 0.5,-0.05]))*0.1
-                    vy=0
-                    va=sum(map(lambda x,y:x*y/(sum(d)+1),d,[ 5.0 ,3.0,0.0,-3.0,-5.0 ]))#*3.0
-                    self._d_Velocity.data=RTC.Velocity2D(vx,vy,va)
-                    OpenRTM_aist.setTimestamp(self._d_Velocity)
-                    self._VelocityOut.write()
+			sensor_data=self._LineSensorsIn.read().data
 
+			vx_weight = [self._VX_weight_sensor_DOWN1[0],self._VX_weight_sensor_DOWN2[0],self._VX_weight_sensor_DOWN3[0],self._VX_weight_sensor_DOWN4[0],self._VX_weight_sensor_DOWN5[0]]				
+			vx_sum = 0.0
+			for i in range(5):
+				vx_sum = vx_sum + sensor_data[i]*vx_weight[i]
+			vx = vx_sum / (sum(sensor_data) + 1)	# +1 は　0での除算を防ぐため
+
+			vy = 0.0
+
+			va_weight = [self._VA_weight_sensor_DOWN1[0],self._VA_weight_sensor_DOWN2[0],self._VA_weight_sensor_DOWN3[0],self._VA_weight_sensor_DOWN4[0],self._VA_weight_sensor_DOWN5[0]]
+			va_sum = 0.0
+			for i in range(5):
+				va_sum = va_sum + sensor_data[i]*vx_weight[i]
+			va = va_sum / (sum(sensor_data) + 1)	# +1 は　0での除算を防ぐため
+			
+			self._d_Velocity.data=RTC.Velocity2D(vx,vy,va)
+			OpenRTM_aist.setTimestamp(self._d_Velocity)
+        	self._VelocityOut.write()
+	
 		return RTC.RTC_OK
-
+	
 	#	##
 	#	#
 	#	# The aborting action when main logic error occurred.
@@ -218,7 +338,7 @@ class LineTracer(OpenRTM_aist.DataFlowComponentBase):
 	#def onAborting(self, ec_id):
 	#
 	#	return RTC.RTC_OK
-
+	
 	#	##
 	#	#
 	#	# The error action in ERROR state
@@ -232,7 +352,7 @@ class LineTracer(OpenRTM_aist.DataFlowComponentBase):
 	#def onError(self, ec_id):
 	#
 	#	return RTC.RTC_OK
-
+	
 	#	##
 	#	#
 	#	# The reset action that is invoked resetting
@@ -246,7 +366,7 @@ class LineTracer(OpenRTM_aist.DataFlowComponentBase):
 	#def onReset(self, ec_id):
 	#
 	#	return RTC.RTC_OK
-
+	
 	#	##
 	#	#
 	#	# The state update action that is invoked after onExecute() action
@@ -261,7 +381,7 @@ class LineTracer(OpenRTM_aist.DataFlowComponentBase):
 	#def onStateUpdate(self, ec_id):
 	#
 	#	return RTC.RTC_OK
-
+	
 	#	##
 	#	#
 	#	# The action that is invoked when execution context's rate is changed
@@ -275,7 +395,7 @@ class LineTracer(OpenRTM_aist.DataFlowComponentBase):
 	#def onRateChanged(self, ec_id):
 	#
 	#	return RTC.RTC_OK
-
+	
 
 
 

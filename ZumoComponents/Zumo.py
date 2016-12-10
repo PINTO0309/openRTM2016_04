@@ -342,23 +342,30 @@ class Zumo(OpenRTM_aist.DataFlowComponentBase):
 
 		"""
 		# シリアルポートのオープン
-		self.SPort=serial.Serial(self._Port[0],timeout=TimeOut)
-		# データ送信の開始
-		self.Send(0x78,True)
-		# 値の初期化
-		self.VLr=0
-		self.VRr=0
-		self.X=0
-		self.Y=0
-		self.A=0
-		self.T=time.time()
-		# 受信の開始
-		self.recieving=True
-		self.RTh=threading.Thread(target=self.Receive)
-		self.RTh.start()
-		self.Received=[]
+		try:
+                    self.SPort=serial.Serial(self._Port[0],timeout=TimeOut)
+                except:
+                    print "Serial port open failed."
+                    return RTC.RTC_ERROR
 
-		return RTC.RTC_OK
+                # データ送信の開始
+                if self.Send(0x78,True)==False:
+                    return RTC.RTC_ERROR
+
+                # 値の初期化
+                self.VLr=0
+                self.VRr=0
+                self.X=0
+                self.Y=0
+                self.A=0
+                self.T=time.time()
+		# 受信の開始
+                self.recieving=True
+                self.RTh=threading.Thread(target=self.Receive)
+                self.RTh.start()
+                self.Received=[]
+
+                return RTC.RTC_OK
 
 	def onDeactivated(self, ec_id):
 		"""
@@ -372,17 +379,19 @@ class Zumo(OpenRTM_aist.DataFlowComponentBase):
 
 		"""
 		# データ送信の停止
-		self.Send(0x78,False)
+		if self.Send(0x78,False)==False:
+                    return RTC.RTC_ERROR
 		# クローラの停止
-		self.Send(0x02,0)
-		self.Send(0x03,0)
+		if self.Send(0x02,0)==False:
+                    return RTC.RTC_ERROR
+                if self.Send(0x03,0)==False:
+                    return RTC.RTC_ERROR
 		#受信の停止
-		self.recieving=False
-		self.RTh.join()
+                self.recieving=False
+                self.RTh.join()
 		# シリアルポートのクローズ
 		self.SPort.close()
 		self.SPort=None
-
 
 		return RTC.RTC_OK
 
@@ -404,8 +413,10 @@ class Zumo(OpenRTM_aist.DataFlowComponentBase):
                         VA=data.va
                         VL=VX-hftr*VA
                         VR=VX+hftr*VA
-                        self.Send(0x02,VL*CntPM)
-                        self.Send(0x03,VR*CntPM)
+                        if self.Send(0x02,VL*CntPM)==False:
+                            return RTC.RTC_ERROR
+                        if self.Send(0x03,VR*CntPM)==False:
+                            return RTC.RTC_ERROR
 		# 現在位置推測
 		VA=(self.VRr-self.VLr)/tread
 		VX=(self.VRr+self.VLr)/2.0
@@ -446,8 +457,15 @@ class Zumo(OpenRTM_aist.DataFlowComponentBase):
                                 print ID,Data
                                 self.Functions[ID](Data)
                                 self.Received=[]
+
 	def Send(self,ID,Data):# データの送信
-		self.SPort.write(MakeData(ID,Data))
+            try:
+                self.SPort.write(MakeData(ID,Data))
+            except:
+                print "Serial Connection Timeout."
+                return False
+            else:
+                return True
 
 	#def onAborting(self, ec_id):
 	#	"""
