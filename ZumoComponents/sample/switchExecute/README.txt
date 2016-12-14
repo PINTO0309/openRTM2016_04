@@ -5,10 +5,10 @@
 
 各プログラムの説明です。
 ・ActiveComp.py
-スイッチの入力を感知すると、Zumo-comp.py、LineTracer-comp.pyを立ち上げRTShellでコンポーネントの接続、コンフィグの変更、コンポーネントのアクティブを行います。場所は/home/pi/においてください。
+スイッチの入力を感知すると、Zumo.py、LineTracer.pyを立ち上げRTShellでコンポーネントの接続、コンフィグの変更、コンポーネントのアクティブを行います。場所は/home/pi/においてください。
 
 ・DeactiveComp.py
-スイッチの入力を感知すると、Zumo-comp.py、LineTracer-comp.pyをexitし、Zumoを止めます。場所は/home/pi/においてください。
+スイッチの入力を感知すると、Zumo.py、LineTracer.pyをexitし、Zumoを止めます。場所は/home/pi/においてください。
 
 ・runZumo.sh,stopZumo.sh
 それぞれActiveComp.py、DeactiveComp.pyを動かすためのシェルファイルです。場所は/etcにおいてください。

@@ -13,10 +13,10 @@ try:
 		if GPIO.input(25) == 1:
                         print "start"
                         os.system("echo y | rtm-naming")
-                        os.system("sudo python /home/pi/Desktop/RTC/Zumo-comp.py &")
-                        print "Start Zumo-comp.py"
-                        os.system("sudo python /home/pi/Desktop/RTC/LineTracer-comp.py &")
-                        print "Start LineTracer-comp.py"
+                        os.system("sudo python /home/pi/Desktop/RTC/Zumo.py &")
+                        print "Start Zumo.py"
+                        os.system("sudo python /home/pi/Desktop/RTC/LineTracer.py &")
+                        print "Start LineTracer.py"
                         sleep(0.5)
                         os.system("rtcon /localhost/raspberrypi.host_cxt/Zumo0.rtc:VelocityIn /localhost/raspberrypi.host_cxt/LineTracer0.rtc:Velocity")
                         os.system("rtcon /localhost/raspberrypi.host_cxt/Zumo0.rtc:LineSensors /localhost/raspberrypi.host_cxt/LineTracer0.rtc:LineSensors")
